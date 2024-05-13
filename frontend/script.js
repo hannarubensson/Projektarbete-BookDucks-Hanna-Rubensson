@@ -41,8 +41,8 @@ let logIn = async () => {
     if (response.data.jwt) {
 
         loggedIn = true; 
-        sessionStorage.setItem("user", userName.value);
-        sessionStorage.setItem("token", response.data.jwt);
+        localStorage.setItem("user", userName.value);
+        localStorage.setItem("token", response.data.jwt);
         window.location.href = "loggedin.html";
 
     } else {

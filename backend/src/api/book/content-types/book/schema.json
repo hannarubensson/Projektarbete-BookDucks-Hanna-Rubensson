@@ -34,6 +34,12 @@
     },
     "grade": {
       "type": "integer"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "books"
     }
   }
 }

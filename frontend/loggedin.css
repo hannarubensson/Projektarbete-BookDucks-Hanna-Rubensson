@@ -101,7 +101,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    gap: 30px; 
     background-color: #D9D9D9;
     border-radius: 0px 0px 50px 50px;
     padding: 50px; 
@@ -140,4 +142,24 @@ input[type="range"] {
     accent-color:  #ffb5b5;
     color: #387946;  
     border: 1px solid black; 
+}
+
+/* STYLING FOR BOOK GRADING */ 
+
+
+.book-info {
+    font-family: "Londrina Solid";
+    font-size: 24px;
+    -webkit-text-stroke: 1.25px #387946; 
+    color: #FFE3E3;
+    background-color: white; 
+    padding: 25px; 
+    border-radius: 25px; 
+}
+
+.book-grading-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

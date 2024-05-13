@@ -771,6 +771,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    books: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::book.book'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -838,6 +843,11 @@ export interface ApiBookBook extends Schema.CollectionType {
     published: Attribute.Date;
     img: Attribute.Media;
     grade: Attribute.Integer;
+    users_permissions_users: Attribute.Relation<
+      'api::book.book',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::book.book', 'oneToOne', 'admin::user'> &
@@ -911,6 +921,35 @@ export interface ApiSummerThemeSummerTheme extends Schema.SingleType {
   };
 }
 
+export interface ApiThemeTheme extends Schema.SingleType {
+  collectionName: 'themes';
+  info: {
+    singularName: 'theme';
+    pluralName: 'themes';
+    displayName: 'theme';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    theme: Attribute.Enumeration<['summer-theme', 'autumn-theme', 'sea-theme']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::theme.theme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::theme.theme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -933,6 +972,7 @@ declare module '@strapi/types' {
       'api::book.book': ApiBookBook;
       'api::sea-theme.sea-theme': ApiSeaThemeSeaTheme;
       'api::summer-theme.summer-theme': ApiSummerThemeSummerTheme;
+      'api::theme.theme': ApiThemeTheme;
     }
   }
 }
