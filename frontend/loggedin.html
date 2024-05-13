@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged in</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="loggedin.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <h1 id="logged-in-h1">Book Ducks</h1>
+        </div>
+
+            <div class="links">
+                <a href="user.html">My account</a>
+                <a href="index.html">Log out</a>
+            </div>
+    </header>
+
+    <div class="book-wrapper">
+
+        <div id="welcome-greeting">
+            <p id="welcome-greeting-text">Welcome back, Magica!<br>
+            Time to grade some books!</p>
+        </div>
+
+        <h2 class="logged-in-h2">Book Grading</h2>
+
+        <div id="book-grading">
+            <img src="Images/book1.jpg" alt="Book" width="200px" height="auto" class="image">
+            <div class="text-overlay">
+                <input type="range" id="book-rating" min="0" max="5">
+                <br>
+                Grade Jane Austen's Book
+                <br>
+                <button id="submit-grading">Submit grading</button>
+                <br>
+                <button style="font-size:16px" class="heart-icon">Save to read list <i class="fa fa-heart"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

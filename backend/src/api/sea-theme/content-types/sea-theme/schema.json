@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "sea_themes",
+  "info": {
+    "singularName": "sea-theme",
+    "pluralName": "sea-themes",
+    "displayName": "sea-theme"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "backgroundColor": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
+    },
+    "accentColor": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

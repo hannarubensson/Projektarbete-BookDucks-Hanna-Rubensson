@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&family=Lusitana:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 30px; 
+    font-family: "Lusitana";
+    background-color: #FFE3E3;
+}
+
+#first-page-h1 {
+    font-family: "Londrina Solid";
+    font-size: 3em; 
+    -webkit-text-stroke: 1.25px #387946; 
+    color: white; 
+    position: absolute; 
+    margin-bottom: 60px; 
+}
+
+#first-page-h2 {
+    font-family: "Londrina Solid";
+    font-size: 3em; 
+    -webkit-text-stroke: 1.25px #387946; 
+    color: white; 
+}
+
+.wrapper {
+    background-image: url(Images/paper-bg.jpg);
+    border-radius: 50px;
+    border: 2px solid #387946; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px; 
+    gap: 50px; 
+}
+
+/* LOGIN CONTAINER + BTN STYLING */
+
+#login-wrapper img {
+    width: 350px;
+    height: auto;
+    border-radius: 25px 25px 0px 0px; 
+    position: relative;
+    opacity: 0.5;
+}
+
+#login-wrapper {
+    padding: 0px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+    border-radius: 25px;
+    gap: 10px; 
+    padding-bottom: 20px; 
+}
+
+#login-wrapper input {
+    border-radius: 10px; 
+    font-family: "Poppins"; 
+    padding: 5px 25px 5px 25px; 
+    border: 0px; 
+    outline: 0px;
+    width: 250px;
+}
+
+input:focus {
+    border: 0px; 
+    outline: 0px; 
+}
+
+#register-user-btn {
+    background-color: #ADADAD;
+    padding: 5px;
+    width: 300px;
+    border-radius: 10px;
+    border: 0.75px solid black;  
+    font-family: "Poppins";
+}
+
+#login-user-btn {
+    background-color: #ADADAD;
+    padding: 5px;
+    width: 300px;
+    border-radius: 10px;
+    border: 0.75px solid black;  
+    font-family: "Poppins";
+}
+
+#login-wrapper button:hover {
+    background-color: #8e8e8e;
+}
+
+
+/* PHOTO GALLERY */
+#photo-gallery {
+    background-color: #E4E4E4;
+    border-radius: 50px;
+    width: 600px;
+    height: auto; 
+    padding: 50px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+.book-info {
+    font-family: "Londrina Solid";
+    font-size: 24px;
+    -webkit-text-stroke: 1.25px #387946; 
+    color: #FFE3E3;
+    background-color: white; 
+    padding: 25px; 
+    border-radius: 25px; 
+}
+

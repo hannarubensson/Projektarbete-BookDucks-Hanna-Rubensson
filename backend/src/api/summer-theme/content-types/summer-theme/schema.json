@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "summer_themes",
+  "info": {
+    "singularName": "summer-theme",
+    "pluralName": "summer-themes",
+    "displayName": "summer-theme"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "backgroundColor": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
+    },
+    "accentColor": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
