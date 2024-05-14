@@ -41,3 +41,35 @@ renderLikedBooks(currentUserId);
 //     books.sort((a, b) => (a.author > b.author) ? 1 : -1);
 //     renderLikedBooks();
 // });
+
+
+// GET DATA FUNCTION
+let getData = async (url) => {
+    let response = await axios.get(url); 
+    console.log(response); 
+    return response; 
+}
+
+// THEME 
+
+let currentTheme = async () => {
+
+    let data = await getData("http://localhost:1337/api/theme?populate=*"); 
+    let newData = data.data.data;
+    let bg = document.getElementById("profile-wrapper");
+  
+    if(newData.attributes.theme === "summer-theme") { 
+      bg.style.backgroundImage = "url('Images/summer-theme.jpg')";
+      document.body.style.background = "#fddc95"; 
+  
+    } else if (newData.attributes.theme === "sea-theme") {
+      bg.style.backgroundImage = "url('Images/sea-theme.jpg')";
+      document.body.style.background = "#C7EAEE"; 
+    
+    } else {
+      bg.style.backgoundImage = "url('Images/paper-bg.jpg')";
+    }
+  
+  }
+  
+  currentTheme(); 

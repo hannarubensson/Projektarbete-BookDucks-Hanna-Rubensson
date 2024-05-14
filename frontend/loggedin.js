@@ -14,15 +14,28 @@ let getData = async (url) => {
     return response; 
 }
 
-let postData = async (url) => {
-    let post = await axios.post(url); 
+let currentTheme = async () => {
+
+    let data = await getData("http://localhost:1337/api/theme?populate=*"); 
+    let newData = data.data.data;
+    let bg = document.getElementById("book-wrapper");
+  
+    if(newData.attributes.theme === "summer-theme") { 
+      bg.style.backgroundImage = "url('Images/summer-theme.jpg')";
+      document.body.style.background = "#fddc95";
+  
+    } else if (newData.attributes.theme === "sea-theme") {
+      bg.style.backgroundImage = "url('Images/sea-theme.jpg')"; 
+      document.body.style.background = "#C7EAEE"; 
     
-    // data: {
-    //     title: todoTitle,
-    //     user: userId,
-    //     img: response.data[0].id,
-    
-}
+    } else {
+      bg.style.backgoundImage = "url('Images/paper-bg.jpg')";
+    }
+  
+  }
+  
+  currentTheme(); 
+
 
 // GREETING FOR CURRENT USER
 let greeting = (user) => {

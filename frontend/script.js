@@ -99,14 +99,22 @@ renderBooks();
 
 let currentTheme = async () => {
 
-  let data = await getData("http://localhost:1337/api/theme"); 
+  let data = await getData("http://localhost:1337/api/theme?populate=*"); 
+  let newData = data.data.data;
+  let bg = document.getElementById("wrapper");
 
-  console.log("theme:", data); 
+  if(newData.attributes.theme === "summer-theme") { 
+    bg.style.backgroundImage = "url('Images/summer-theme.jpg')";
+    document.body.style.background = "#fddc95";
 
-  if(data.data.attributes.theme === "summer-theme") {
-    let bg = document.getElementById("wrapper"); 
-    bg.style.backgroundImage = `url("Images/summer-theme.jpg")`;
+  } else if (newData.attributes.theme === "sea-theme") {
+    bg.style.backgroundImage = "url('Images/sea-theme.jpg')"; 
+    document.body.style.background = "#C7EAEE"; 
+  
+  } else {
+    bg.style.backgoundImage = "url('Images/paper-bg.jpg')";
   }
+
 }
 
 currentTheme(); 

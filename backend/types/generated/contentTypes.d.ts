@@ -362,6 +362,70 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiBookBook extends Schema.CollectionType {
+  collectionName: 'books';
+  info: {
+    singularName: 'book';
+    pluralName: 'books';
+    displayName: 'book';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String;
+    author: Attribute.String;
+    pages: Attribute.Integer;
+    published: Attribute.Date;
+    img: Attribute.Media;
+    grade: Attribute.Integer;
+    users_permissions_users: Attribute.Relation<
+      'api::book.book',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::book.book', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::book.book', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiThemeTheme extends Schema.SingleType {
+  collectionName: 'themes';
+  info: {
+    singularName: 'theme';
+    pluralName: 'themes';
+    displayName: 'theme';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    theme: Attribute.Enumeration<
+      ['summer-theme', 'sea-theme', 'default-theme']
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::theme.theme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::theme.theme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -793,163 +857,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiAutumnThemeAutumnTheme extends Schema.SingleType {
-  collectionName: 'autumn_themes';
-  info: {
-    singularName: 'autumn-theme';
-    pluralName: 'autumn-themes';
-    displayName: 'autumn-theme';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    backgroundColor: Attribute.String;
-    textColor: Attribute.String;
-    accentColor: Attribute.String;
-    backgroundImage: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::autumn-theme.autumn-theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::autumn-theme.autumn-theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBookBook extends Schema.CollectionType {
-  collectionName: 'books';
-  info: {
-    singularName: 'book';
-    pluralName: 'books';
-    displayName: 'book';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Attribute.String;
-    author: Attribute.String;
-    pages: Attribute.Integer;
-    published: Attribute.Date;
-    img: Attribute.Media;
-    grade: Attribute.Integer;
-    users_permissions_users: Attribute.Relation<
-      'api::book.book',
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::book.book', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::book.book', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSeaThemeSeaTheme extends Schema.SingleType {
-  collectionName: 'sea_themes';
-  info: {
-    singularName: 'sea-theme';
-    pluralName: 'sea-themes';
-    displayName: 'sea-theme';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    backgroundColor: Attribute.String;
-    textColor: Attribute.String;
-    accentColor: Attribute.String;
-    backgroundImage: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::sea-theme.sea-theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::sea-theme.sea-theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSummerThemeSummerTheme extends Schema.SingleType {
-  collectionName: 'summer_themes';
-  info: {
-    singularName: 'summer-theme';
-    pluralName: 'summer-themes';
-    displayName: 'summer-theme';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    backgroundColor: Attribute.String;
-    textColor: Attribute.String;
-    accentColor: Attribute.String;
-    backgroundImage: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::summer-theme.summer-theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::summer-theme.summer-theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiThemeTheme extends Schema.SingleType {
-  collectionName: 'themes';
-  info: {
-    singularName: 'theme';
-    pluralName: 'themes';
-    displayName: 'theme';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    theme: Attribute.Enumeration<['summer-theme', 'autumn-theme', 'sea-theme']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::theme.theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::theme.theme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -960,6 +867,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::book.book': ApiBookBook;
+      'api::theme.theme': ApiThemeTheme;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -968,11 +877,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::autumn-theme.autumn-theme': ApiAutumnThemeAutumnTheme;
-      'api::book.book': ApiBookBook;
-      'api::sea-theme.sea-theme': ApiSeaThemeSeaTheme;
-      'api::summer-theme.summer-theme': ApiSummerThemeSummerTheme;
-      'api::theme.theme': ApiThemeTheme;
     }
   }
 }

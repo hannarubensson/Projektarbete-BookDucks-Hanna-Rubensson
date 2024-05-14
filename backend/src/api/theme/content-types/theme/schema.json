@@ -4,7 +4,8 @@
   "info": {
     "singularName": "theme",
     "pluralName": "themes",
-    "displayName": "theme"
+    "displayName": "theme",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -15,8 +16,8 @@
       "type": "enumeration",
       "enum": [
         "summer-theme",
-        "autumn-theme",
-        "sea-theme"
+        "sea-theme",
+        "default-theme"
       ]
     }
   }
