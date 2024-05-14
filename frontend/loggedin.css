@@ -142,6 +142,8 @@ input[type="range"] {
     accent-color:  #ffb5b5;
     color: #387946;  
     border: 1px solid black; 
+    width: 100%;
+    height: 10px; 
 }
 
 /* STYLING FOR BOOK GRADING */ 
@@ -162,4 +164,8 @@ input[type="range"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.book-grading-wrapper button {
+    margin: 10px;
 }

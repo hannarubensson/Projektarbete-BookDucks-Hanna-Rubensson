@@ -6,7 +6,7 @@ let loginUserBtn = document.getElementById("login-user-btn");
 let loggedIn = false; 
 
 //------------------------------------------------------//
-let register = async () => {
+const register = async () => {
 
     console.log("User registrerad!");
 
@@ -40,9 +40,12 @@ let logIn = async () => {
 
     if (response.data.jwt) {
 
+        console.log("Response data: ", response.data); 
+
         loggedIn = true; 
         localStorage.setItem("user", userName.value);
         localStorage.setItem("token", response.data.jwt);
+        localStorage.setItem("user_id", response.data.user.id);
         window.location.href = "loggedin.html";
 
     } else {
@@ -91,3 +94,19 @@ async function renderBooks() {
 }
 
 renderBooks(); 
+
+// ~~~~~~~~~~~~ THEME ~~~~~~~~~~~~~~~~ //
+
+let currentTheme = async () => {
+
+  let data = await getData("http://localhost:1337/api/theme"); 
+
+  console.log("theme:", data); 
+
+  if(data.data.attributes.theme === "summer-theme") {
+    let bg = document.getElementById("wrapper"); 
+    bg.style.backgroundImage = `url("Images/summer-theme.jpg")`;
+  }
+}
+
+currentTheme(); 

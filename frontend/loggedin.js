@@ -4,6 +4,7 @@ let token = sessionStorage.getItem("token"); // Spara & koppla böcker till en J
 // ADD RELATION BETWEEN LIKED BOOKS & USER
 let loggedIn = true; 
 
+console.log("Current user:", currentUser); 
 // -------------------------------------------------- // 
 
 // GET DATA FUNCTION
@@ -15,6 +16,11 @@ let getData = async (url) => {
 
 let postData = async (url) => {
     let post = await axios.post(url); 
+    
+    // data: {
+    //     title: todoTitle,
+    //     user: userId,
+    //     img: response.data[0].id,
     
 }
 
@@ -67,7 +73,7 @@ let renderBooks = async () => {
         <input type="range" id="book-rating" min="0" max="5">
         <br>
         <br>
-        <button style="font-size:16px" class="heart-icon" id="save-book-btn">
+        <button style="font-size:16px" class="heart-icon" id="save-book-btn" onclick="saveBook(${book.id})">
         Save to read list <i class="fa fa-heart"></i>
         <br>
         <button id="submit-grading">Submit grading</button>
@@ -79,14 +85,55 @@ let renderBooks = async () => {
 
 renderBooks(); 
 
+let connectBook = async (bookId) => {
 
-// FORTSÄTT MED ATT LÄGGA IN EVENTLISTERNER PÅ GILLAKNAPPEN + RANGE
+    let userId = localStorage.getItem("user_id"); 
+    let payload = {books: {
+        connect: [bookId]
+    }}; 
+    await axios.put(`http://localhost:1337/api/users/${userId}`, payload);
+
+}
+
+
+let saveBook = async (id) => {
+
+    await connectBook(id); 
+
+}
 
 let saveBookBtn = document.getElementById("save-book-btn"); 
 
-saveBookBtn.addEventListener("click", async () => {
+// saveBookBtn.addEventListener("click", async () => {
 
     // GÖR EN POST PÅ POPULATE DEEP MED ETT DYNAMISKT NUMMER PÅ BOKEN - ALLA BÖCKER HAR VISSA NUMMER...! 
     // Books.id. hittas på http://localhost:1337/api/books?populate=*
     // EN RELATION SKAPAS PÅ http://localhost:1337/api/users?populate=deep,2 .... 
-})
+// }); 
+
+let inputRating = document.getElementById("book-rating"); 
+let submitBookGrading = document.getElementById("submit-grading"); 
+
+// POST MED AXIOS..! http://localhost:1337/api/books?populate=*
+// MÅSTE HA RÄTT ID PÅ BOKEN ....! 
+
+
+
+let checkBookGrading = async (id) => {
+
+    let newBookValue = inputRating.value; 
+    let response = await axios.post(`http://localhost:1337/api/books/${id}`);
+
+}
+
+
+// submitBookGrading.addEventListener("click", async () => {
+
+//     await checkBookGrading(); 
+
+// }); 
+
+
+// VG-KRAV: 
+// LÄSA UT ALLA ANVÄNDARDATA + DERAS BÖCKER + LÄSA BETYGET ... + RÄKNA UT SNITTBETYG PÅ SÅ VIS
+// POST-REQUEST + HÄMTA BÖCKERNA OCH HÄMTA OBJEKTET OCH LÄGG IN DET NYA SNITTBETYGET 

@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My account</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="user.css">
 </head>
 <body>
     
+    <header class="header">
+        <div class="logo">
+            <h1 id="logged-in-h1">Book Ducks</h1>
+        </div>
+
+            <div class="links">
+                <a href="loggedin.html">Main</a>
+                <a href="user.html">My account</a>
+                <a href="index.html" onclick="logOut()">Log out</a>
+            </div>
+    </header>
+
+    <div class="profile-wrapper">
+        
+        <img src="Images/avatar-pic.jpg" alt="Cute book avatar">
+
+        <div class="profile-info">
+            <h2 id="profile-h2">My reading list</h2>
+
+            <div class="button-wrapper">
+                <button style="font-size:24px" id="sort-by-title-btn">Sort by title <i class="fa fa-sort-alpha-asc"></i></button>
+                <button style="font-size:24px" id="sort-by-author-btn">Sort by author <i class="fa fa-sort-alpha-asc"></i></button>
+            </div>
+
+            <ul id="my-reading-list">
+                
+            </ul>
+
+        </div>
+
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="user.js"></script>
 </body>
 </html>

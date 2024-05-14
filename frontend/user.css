@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&family=Lusitana:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0px; 
+    background-color: #D3BABA;
+}
+
+#logged-in-h1 {
+    font-family: "Londrina Solid";
+    font-size: 3em; 
+    -webkit-text-stroke: 1.25px #387946; 
+    color: #FFE3E3; 
+    position: absolute;
+    z-index: 2; 
+}
+
+.header {
+    position: relative;
+    background-image: url("Images/bookstore.jpg");
+    background-size: cover;
+    padding: 20px;
+    height: 100px; 
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px; 
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #d3babab2;
+    z-index: 1;
+}
+
+.header a {
+    z-index: 2;
+    color: rgba(255, 255, 255, 1.0);
+    font-family: "Poppins";
+    text-decoration: none;
+}
+
+.header a:hover {
+    color: black; 
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* AVATAR & DIV STYLING */ 
+
+.profile-wrapper {
+    background-image: url(Images/paper-bg.jpg); 
+    border-radius: 50px; 
+    border: 3px solid #387946; 
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile-wrapper img {
+    border-radius: 100px;
+    border: 3px solid #387946; 
+    width: 20%;
+    margin-top: 50px; 
+    margin-bottom: -20px;
+    z-index: 1; 
+}
+
+.profile-info {
+    background-color: white;
+    border-radius: 0px 0px 50px 50px;
+    height: 300px; 
+    width: 100%; 
+    border-top: 3px solid #387946; 
+}
+
+#profile-h2 {
+    text-align: center;
+    font-family: "Londrina Solid";
+    font-size: 3em; 
+    -webkit-text-stroke: 1.25px #387946; 
+    color: #FFE3E3; 
+}
+
+
+/* BUTTON DIV & SORTING BUTTON STYLING */ 
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
+}
+
+#sort-by-title-btn {
+    background-color: #FFE3E3;
+    padding: 5px; 
+    border-radius: 10px 10px 0px 0px;
+    color: #387946;
+    font-family: "Poppins"; 
+    border: 2px solid #387946;
+}
+
+#sort-by-title-btn:hover {
+    background-color: #387946;
+    color: #FFE3E3;
+}
+
+#sort-by-author-btn {
+    background-color: #FFE3E3;
+    padding: 5px; 
+    border-radius: 10px 10px 0px 0px;
+    color: #387946;
+    font-family: "Poppins"; 
+    border: 2px solid #387946;
+}
+
+#sort-by-author-btn:hover {
+    background-color: #387946;
+    color: #FFE3E3;
+}
+
+#my-reading-list {
+    text-align: center;
+    font-family: "Poppins";
+    list-style: none; 
+}
