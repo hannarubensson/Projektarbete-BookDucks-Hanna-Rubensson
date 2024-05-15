@@ -19,7 +19,14 @@ const register = async () => {
         password: password.value,
       }
     );
-    console.log(response);
+
+    console.log("Response: ", response); 
+    
+    let span = document.getElementById("register-message"); 
+    let p = document.createElement("p"); 
+    p.innerHTML = `${response.data.user.username} is now a BookDuck!`;
+
+    span.append(p); 
   };
   
 
@@ -80,12 +87,13 @@ async function renderBooks() {
         let bookWrapper = document.getElementById("photo-gallery"); 
         let div = document.createElement("div"); 
         div.innerHTML = `
-        <img src="http://localhost:1337${book.attributes.img.data.attributes.url}" width="300px" height="auto">
+        <img src="http://localhost:1337${book.attributes.img.data.attributes.url}" width="auto" height="300px">
         <h2 class="book-info">
         Title: ${book.attributes.title}<br>
         Author: ${book.attributes.author}<br>
         Pages: ${book.attributes.pages}<br>
         Published: ${book.attributes.published}<br>
+        Grade: ${book.attributes.grade}<br>
         </h2>
         `
         bookWrapper.append(div);

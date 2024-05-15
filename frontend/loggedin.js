@@ -30,7 +30,8 @@ let currentTheme = async () => {
     
     } else {
       bg.style.backgoundImage = "url('Images/paper-bg.jpg')";
-    }
+      document.body.style.background = "#FFE3E3"; 
+    }; 
   
   }
   

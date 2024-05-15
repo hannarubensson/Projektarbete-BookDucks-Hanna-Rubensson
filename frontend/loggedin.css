@@ -159,6 +159,7 @@ input[type="range"] {
     border-radius: 25px; 
 }
 
+/* FROM JS */ 
 .book-grading-wrapper {
     display: flex;
     flex-direction: column;

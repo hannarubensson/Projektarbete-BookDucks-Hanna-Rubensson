@@ -2,7 +2,7 @@
 
 body {
     margin: 0px; 
-    background-color: #D3BABA;
+    background-color: #FFE3E3;
 }
 
 #logged-in-h1 {
@@ -87,7 +87,7 @@ body {
 .profile-info {
     background-color: white;
     border-radius: 0px 0px 50px 50px;
-    height: 300px; 
+    height: auto; 
     width: 100%; 
     border-top: 3px solid #387946; 
 }
@@ -141,4 +141,30 @@ body {
     text-align: center;
     font-family: "Poppins";
     list-style: none; 
+}
+
+/* TRASH BIN ICON & ARCHIVED BOOKS */ 
+
+#trash-btn {
+    background-color: #FFE3E3;
+    border-radius: 10px; 
+    padding: 5px; 
+    border: none; 
+}
+
+#trash-btn:hover {
+    color: red; 
+    background-color: black; 
+}
+
+#archive-btn {
+    background-color: #FFE3E3;
+    border-radius: 10px; 
+    padding: 5px; 
+    border: none; 
+}
+
+#archive-btn:hover {
+    background-color: black;
+    color: #FFE3E3;
 }
