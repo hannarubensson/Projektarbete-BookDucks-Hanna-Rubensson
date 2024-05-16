@@ -9,8 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false,
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -66,11 +65,25 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "bookGrade": {
+      "max": 5,
+      "min": 0,
+      "required": false,
+      "unique": false,
+      "type": "integer",
+      "default": 0
+    },
     "books": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::book.book",
       "mappedBy": "users_permissions_users"
+    },
+    "bookgradings": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "users"
     }
   }
 }

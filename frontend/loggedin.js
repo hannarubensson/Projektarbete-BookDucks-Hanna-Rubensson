@@ -1,10 +1,7 @@
 // GLOBAL VARIABLES
 let currentUser = localStorage.getItem("user");
 let token = sessionStorage.getItem("token"); // Spara & koppla böcker till en JWT
-// ADD RELATION BETWEEN LIKED BOOKS & USER
 let loggedIn = true; 
-
-console.log("Current user:", currentUser); 
 // -------------------------------------------------- // 
 
 // GET DATA FUNCTION
@@ -44,7 +41,7 @@ let greeting = (user) => {
     if (loggedIn) {
     let welcomeGreeting = document.getElementById("welcome-greeting-text"); 
     welcomeGreeting.innerHTML = `
-    Welcome back ${user}! <br>
+    Welcome ${user}! <br>
     Time to grade some books!
     `
     }
@@ -84,13 +81,13 @@ let renderBooks = async () => {
         <br>Grade ${book.attributes.author}'s book:
         <br>
         <br>
-        <input type="range" id="book-rating" min="0" max="5">
+        <input type="range" id="book-rating-${book.id}" min="0" max="5">
         <br>
         <br>
         <button style="font-size:16px" class="heart-icon" id="save-book-btn" onclick="saveBook(${book.id})">
         Save to read list <i class="fa fa-heart"></i>
         <br>
-        <button id="submit-grading">Submit grading</button>
+        <button id="submit-grading" onclick="checkBookGrading(${book.id})">Submit grading</button>
         </h2>
         </div>`
         bookGradingWrapper.append(div);
@@ -116,38 +113,59 @@ let saveBook = async (id) => {
 
 }
 
-let saveBookBtn = document.getElementById("save-book-btn"); 
+let connectBookGrading = async (bookId, bookGrade) => {
 
-// saveBookBtn.addEventListener("click", async () => {
-
-    // GÖR EN POST PÅ POPULATE DEEP MED ETT DYNAMISKT NUMMER PÅ BOKEN - ALLA BÖCKER HAR VISSA NUMMER...! 
-    // Books.id. hittas på http://localhost:1337/api/books?populate=*
-    // EN RELATION SKAPAS PÅ http://localhost:1337/api/users?populate=deep,2 .... 
-// }); 
-
-let inputRating = document.getElementById("book-rating"); 
-let submitBookGrading = document.getElementById("submit-grading"); 
-
-// POST MED AXIOS..! http://localhost:1337/api/books?populate=*
-// MÅSTE HA RÄTT ID PÅ BOKEN ....! 
-
-
-
-let checkBookGrading = async (id) => {
-
-    let newBookValue = inputRating.value; 
-    let response = await axios.post(`http://localhost:1337/api/books/${id}`);
+    let payload = {data: {
+        grade: [bookGrade]
+    }}; 
+    
+    await axios.put(`http://localhost:1337/api/books/${bookId}`, payload);
 
 }
 
+// CONNECTA ANVÄNDARE - BOK - GRADING
+let checkBookGrading = async (bookId) => {
 
-// submitBookGrading.addEventListener("click", async () => {
+    let inputRating = document.getElementById(`book-rating-${bookId}`); 
+    let userInput = inputRating.value; 
 
-//     await checkBookGrading(); 
+    let response = await axios.get(`http://localhost:1337/api/books/${bookId}?populate=deep,2`);
 
-// }); 
+    console.log(response); 
 
+    let user = response.data.data.attributes.users_permissions_users; 
+    let bookValues = [];
+    let sum = 0; 
+    
+    user.data.forEach(users => {
 
-// VG-KRAV: 
-// LÄSA UT ALLA ANVÄNDARDATA + DERAS BÖCKER + LÄSA BETYGET ... + RÄKNA UT SNITTBETYG PÅ SÅ VIS
-// POST-REQUEST + HÄMTA BÖCKERNA OCH HÄMTA OBJEKTET OCH LÄGG IN DET NYA SNITTBETYGET 
+        let oldBookGrade = users.attributes.bookGrade;
+
+        if (oldBookGrade === null) {
+            oldBookGrade = 0; 
+            bookValues.push(parseInt(userInput), parseInt(oldBookGrade));
+
+        } else if (oldBookGrade === NaN) {
+            oldBookGrade = 0; 
+            bookValues.push(parseInt(userInput), parseInt(oldBookGrade));
+            
+        } else {
+
+            bookValues.push(parseInt(userInput), parseInt(oldBookGrade));
+        }
+
+        console.log("Userinput::", userInput, "Old Bookgrade", oldBookGrade); 
+    });
+     // TODO : AVERAGE GRADING NOT WORKING, WRONG NUMBER OUTPUT
+    // FUNCTION FOR SUM OF BOOKGRADES
+    for (let i = 0; i < bookValues.length; i++) {
+        sum += bookValues[i];
+    }
+
+    let averageGrading = sum/bookValues.length; 
+    Math.round(averageGrading); 
+
+    console.log("Average grading : ", averageGrading, "BookId:", bookId); 
+    await connectBookGrading(bookId, averageGrading);
+
+}

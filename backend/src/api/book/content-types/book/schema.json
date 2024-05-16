@@ -33,13 +33,19 @@
       ]
     },
     "grade": {
-      "type": "integer"
+      "type": "decimal"
     },
     "users_permissions_users": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "books"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "bookgradings"
     }
   }
 }

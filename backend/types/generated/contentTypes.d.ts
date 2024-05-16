@@ -379,8 +379,13 @@ export interface ApiBookBook extends Schema.CollectionType {
     pages: Attribute.Integer;
     published: Attribute.Date;
     img: Attribute.Media;
-    grade: Attribute.Integer;
+    grade: Attribute.Decimal;
     users_permissions_users: Attribute.Relation<
+      'api::book.book',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    users: Attribute.Relation<
       'api::book.book',
       'manyToMany',
       'plugin::users-permissions.user'
@@ -806,7 +811,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -835,7 +839,21 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    bookGrade: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
     books: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::book.book'
+    >;
+    bookgradings: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToMany',
       'api::book.book'
