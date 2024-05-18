@@ -145,26 +145,26 @@ body {
 
 /* TRASH BIN ICON & ARCHIVED BOOKS */ 
 
-#trash-btn {
+.trash-btn {
     background-color: #FFE3E3;
     border-radius: 10px; 
     padding: 5px; 
     border: none; 
 }
 
-#trash-btn:hover {
+.trash-btn:hover {
     color: red; 
     background-color: black; 
 }
 
-#archive-btn {
+.archive-btn {
     background-color: #FFE3E3;
     border-radius: 10px; 
     padding: 5px; 
     border: none; 
 }
 
-#archive-btn:hover {
+.archive-btn:hover {
     background-color: black;
     color: #FFE3E3;
 }

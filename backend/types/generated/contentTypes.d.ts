@@ -390,6 +390,20 @@ export interface ApiBookBook extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
+    grade_count: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    grade_total: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::book.book', 'oneToOne', 'admin::user'> &

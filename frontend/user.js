@@ -1,7 +1,13 @@
-let sortByTitleBtn = document.getElementById("sort-by-title-btn"); 
-let sortByAuthorBtn = document.getElementById("sort-by-author-btn");
-let currentUserId = localStorage.getItem("user_id"); 
-let currentUser = localStorage.getItem("user"); 
+const sortByTitleBtn = document.getElementById("sort-by-title-btn"); 
+const sortByAuthorBtn = document.getElementById("sort-by-author-btn");
+const currentUserId = localStorage.getItem("user_id"); 
+const currentUser = localStorage.getItem("user"); 
+
+// GET DATA FUNCTION
+let getData = async (url) => {
+  let response = await axios.get(url); 
+  return response; 
+}
 
 const renderLikedBooks = async (id) => {
 
@@ -16,14 +22,14 @@ const renderLikedBooks = async (id) => {
         li.innerHTML = `
         ${book.author}, "${book.title}". Published: ${book.published}. Pages: ${book.pages}. Grade: ${book.grade}
         <br>
-        <button style="font-size:16px" id="archive-btn">Archive book <i class="fa fa-archive"></i></button>
-        <button style="font-size:16px" id="trash-btn">Remove book <i class="fa fa-trash"></i></button>
+        <button style="font-size:16px" class="archive-btn">Archive book <i class="fa fa-archive"></i></button>
+        <button style="font-size:16px" class="trash-btn" onclick="trashBook(${book.id})">Remove book <i class="fa fa-trash"></i></button>
         `;
         ul.append(li); 
       });
 
       return user.books; 
-}
+}; 
 
 renderLikedBooks(currentUserId); 
 
@@ -35,6 +41,7 @@ const sortBookListByTitle = async () => {
   books.forEach(book => {
 
     arr.push({
+      id: book.id, 
       author: book.author,
       grade: book.grade, 
       pages: book.pages,
@@ -47,7 +54,7 @@ const sortBookListByTitle = async () => {
   let sortedArr = arr.sort((a,b) => (a.title > b.title) ? 1 : -1); 
   updateBookList(sortedArr); 
 
-}
+};
 
 const sortBookListByAuthor = async () => {
 
@@ -58,6 +65,7 @@ const sortBookListByAuthor = async () => {
   books.forEach(book => {
 
     arr.push({
+      id: book.id,
       author: book.author,
       grade: book.grade, 
       pages: book.pages,
@@ -69,8 +77,7 @@ const sortBookListByAuthor = async () => {
 
   let sortedArr = arr.sort((a,b) => (a.author > b.author) ? 1 : -1); 
   updateBookList(sortedArr); 
-
-}
+};
 
 const updateBookList = async (arr) => {
 
@@ -82,13 +89,13 @@ const updateBookList = async (arr) => {
     li.innerHTML = `
     ${obj.author}, "${obj.title}". Published: ${obj.published}. Pages: ${obj.pages}. Grade: ${obj.grade}
     <br>
-    <button style="font-size:16px" id="archive-btn">Archive book <i class="fa fa-archive"></i></button>
-    <button style="font-size:16px" id="trash-btn">Remove book <i class="fa fa-trash"></i></button>
+    <button style="font-size:16px" class="archive-btn">Archive book <i class="fa fa-archive"></i></button>
+    <button style="font-size:16px" class="trash-btn" onclick="trashBook(${obj.id})">Remove book <i class="fa fa-trash"></i></button>
     `;
     ul.append(li); 
 }); 
 
-}
+}; 
 
 
 sortByTitleBtn.addEventListener("click", async () => {
@@ -103,15 +110,51 @@ sortByAuthorBtn.addEventListener("click", async () => {
 
 });
 
+//REMOVE DATA FUNCTION ---------------------------------
+const trashBook = async (bookId) => {
 
-// GET DATA FUNCTION - FOR THEME 
-let getData = async (url) => {
-    let response = await axios.get(url); 
-    console.log(response); 
-    return response; 
+  console.log("TrashBOok körs"); 
+  console.log("BookID", bookId); 
+
+  let payload = { 
+      books: {
+        disconnect: [bookId],
+    }
+  }
+  let response = await axios.put(`http://localhost:1337/api/users/${currentUserId}?populate=deep,2`, payload); 
+
+  console.log("Response from delete: ", response); 
+
 }
 
-// THEME UPDATER ------------------------
+// ARCHIVED BOOKS FUNCTION -----------------------------------
+
+let archiveBtn = document.querySelectorAll(".archive-btn"); 
+
+archiveBtn.addEventListener("click", async () => {
+
+  let data = await getData(`http://localhost:1337/api/users/${currentUserId}?populate=deep,2`);
+  let newData = data.data.data; 
+
+  archiveBook(newData); 
+
+}); 
+
+
+
+const archiveBook = (obj) => {
+
+  obj.forEach(book => {
+    let archivedBookList = document.getElementById("my-archived-books-list"); 
+    let li = document.createElement("li");
+    li.innerHTML = `
+    ${book.author}, "${book.title}". Published: ${book.published}. Pages: ${book.pages}. Grade: ${book.grade}
+    `
+    archivedBookList.append(li); 
+  }); 
+}
+
+// THEME UPDATER ----------------------------------------------------------
 
 let currentTheme = async () => {
 

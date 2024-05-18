@@ -7,7 +7,6 @@ let loggedIn = true;
 // GET DATA FUNCTION
 let getData = async (url) => {
     let response = await axios.get(url); 
-    console.log(response); 
     return response; 
 }
 
@@ -87,7 +86,7 @@ let renderBooks = async () => {
         <button style="font-size:16px" class="heart-icon" id="save-book-btn" onclick="saveBook(${book.id})">
         Save to read list <i class="fa fa-heart"></i>
         <br>
-        <button id="submit-grading" onclick="checkBookGrading(${book.id})">Submit grading</button>
+        <button id="submit-grading" onclick="connectBookGrading(${book.id})">Submit grading</button>
         </h2>
         </div>`
         bookGradingWrapper.append(div);
@@ -113,12 +112,32 @@ let saveBook = async (id) => {
 
 }
 
-let connectBookGrading = async (bookId, bookGrade) => {
+let connectBookGrading = async (bookId) => {
 
-    let payload = {data: {
-        grade: [bookGrade]
-    }}; 
-    
+    let inputRating = document.getElementById(`book-rating-${bookId}`); 
+    let bookGrade = parseInt(inputRating.value); 
+
+    console.log("Bookgrade", bookGrade); 
+
+
+    const response = await axios.get(`http://localhost:1337/api/books/${bookId}`);
+    const book = response.data.data;
+
+    if(book.grade_count == null) {
+        book.grade_count = 0; 
+    } 
+
+    if(book.grade_total == null) {
+        book.grade_total = 0; 
+    }
+
+    book.grade_count ++; 
+    book.grade_total += bookGrade; 
+
+    const payload = {
+        data: book
+    }
+
     await axios.put(`http://localhost:1337/api/books/${bookId}`, payload);
 
 }
@@ -129,9 +148,8 @@ let checkBookGrading = async (bookId) => {
     let inputRating = document.getElementById(`book-rating-${bookId}`); 
     let userInput = inputRating.value; 
 
-    let response = await axios.get(`http://localhost:1337/api/books/${bookId}?populate=deep,2`);
+    let response = await axios.post(`http://localhost:1337/api/books/${bookId}?populate=deep,2`, payload);
 
-    console.log(response); 
 
     let user = response.data.data.attributes.users_permissions_users; 
     let bookValues = [];
