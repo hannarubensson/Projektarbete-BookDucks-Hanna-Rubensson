@@ -168,3 +168,13 @@ body {
     background-color: black;
     color: #FFE3E3;
 }
+
+/* MY GRADED BOOKS-LIST & ARCHIVED BOOKS */ 
+
+.my-graded-books-h3 {
+    text-align: center;
+    font-family: "Londrina Solid";
+    font-size: 3em; 
+    -webkit-text-stroke: 1.25px #387946; 
+    color: #FFE3E3;
+}
