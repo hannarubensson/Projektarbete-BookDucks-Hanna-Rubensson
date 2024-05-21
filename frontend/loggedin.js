@@ -56,10 +56,6 @@ let logOut = () => {
     loggedIn = false; 
 }
 
-
-// RENDERA UT BÖCKERNA I APIET + KNAPP FÖR ATT GILLA BÖCKER + BÖCKER SKA KOMMA UPP SOM EN RELATION TILL USER
-// http://localhost:1337/api/users?populate=deep,2 för att hitta gillade böcker - post till detta endpoint
-
 let renderBooks = async () => {
     
     let response = await getData("http://localhost:1337/api/books?populate=*"); 
@@ -102,88 +98,11 @@ let connectBook = async (bookId) => {
         connect: [bookId]
     }}; 
     await axios.put(`http://localhost:1337/api/users/${userId}`, payload);
-
 }
 
 
 let saveBook = async (id) => {
 
     await connectBook(id); 
-
-}
-
-let connectBookGrading = async (bookId) => {
-
-    let inputRating = document.getElementById(`book-rating-${bookId}`); 
-    let bookGrade = parseInt(inputRating.value); 
-
-    console.log("Bookgrade", bookGrade); 
-
-
-    const response = await axios.get(`http://localhost:1337/api/books/${bookId}`);
-    const book = response.data.data;
-
-    if(book.grade_count == null) {
-        book.grade_count = 0; 
-    } 
-
-    if(book.grade_total == null) {
-        book.grade_total = 0; 
-    }
-
-    book.grade_count ++; 
-    book.grade_total += bookGrade; 
-
-    const payload = {
-        data: book
-    }
-
-    await axios.put(`http://localhost:1337/api/books/${bookId}`, payload);
-
-}
-
-// CONNECTA ANVÄNDARE - BOK - GRADING
-let checkBookGrading = async (bookId) => {
-
-    let inputRating = document.getElementById(`book-rating-${bookId}`); 
-    let userInput = inputRating.value; 
-
-    let response = await axios.post(`http://localhost:1337/api/books/${bookId}?populate=deep,2`, payload);
-
-
-    let user = response.data.data.attributes.users_permissions_users; 
-    let bookValues = [];
-    let sum = 0; 
-    
-    user.data.forEach(users => {
-
-        let oldBookGrade = users.attributes.bookGrade;
-
-        if (oldBookGrade === null) {
-            oldBookGrade = 0; 
-            bookValues.push(parseInt(userInput), parseInt(oldBookGrade));
-
-        } else if (oldBookGrade === NaN) {
-            oldBookGrade = 0; 
-            bookValues.push(parseInt(userInput), parseInt(oldBookGrade));
-            
-        } else {
-
-            bookValues.push(parseInt(userInput), parseInt(oldBookGrade));
-        }
-
-        console.log("Userinput::", userInput, "Old Bookgrade", oldBookGrade); 
-    });
-     // TODO : AVERAGE GRADING NOT WORKING, WRONG NUMBER OUTPUT
-    // FUNCTION FOR SUM OF BOOKGRADES
-    for (let i = 0; i < bookValues.length; i++) {
-        sum += bookValues[i];
-    }
-
-    let averageGrading = sum/bookValues.length; 
-    Math.round(averageGrading); 
-
-    console.log("Average grading : ", averageGrading, "BookId:", bookId); 
-    await connectBookGrading(bookId, averageGrading);
 
 }

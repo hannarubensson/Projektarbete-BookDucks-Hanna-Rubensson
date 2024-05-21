@@ -8,8 +8,6 @@ let loggedIn = false;
 //------------------------------------------------------//
 const register = async () => {
 
-    console.log("User registrerad!");
-
     let response = await axios.post(
       "http://localhost:1337/api/auth/local/register",
 
@@ -19,8 +17,6 @@ const register = async () => {
         password: password.value,
       }
     );
-
-    console.log("Response: ", response); 
     
     let span = document.getElementById("register-message"); 
     let p = document.createElement("p"); 
@@ -39,11 +35,6 @@ let logIn = async () => {
       }
     );
 
-    console.log("User profile:", response.data.user);
-    console.log("User token:", response.data.jwt);
-    console.log(response);
-
-    // sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
     if (response.data.jwt) {
 

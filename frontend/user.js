@@ -113,17 +113,12 @@ sortByAuthorBtn.addEventListener("click", async () => {
 //REMOVE DATA FUNCTION ---------------------------------
 const trashBook = async (bookId) => {
 
-  console.log("TrashBOok körs"); 
-  console.log("BookID", bookId); 
-
   let payload = { 
       books: {
         disconnect: [bookId],
     }
   }
   let response = await axios.put(`http://localhost:1337/api/users/${currentUserId}?populate=deep,2`, payload); 
-
-  console.log("Response from delete: ", response); 
 
 }
 
